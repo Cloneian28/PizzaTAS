@@ -1,4 +1,5 @@
 tas = [] // Usage: global.tas[frame]
+tas_path = ""
 frames = 0
 mode = 0 // 0: No tas, 1: Recording, 2: Playback
 current_frame = 0
@@ -15,7 +16,7 @@ if file_exists("tasconfig.ini")
 	mode = ini_read_real("TAS", "mode", 2)
 
 	// Reading the tas
-	var tas_path = ini_read_string("TAS", "path", "")
+	tas_path = ini_read_string("TAS", "path", "")
 	if file_exists(tas_path) && mode == 2
 	{
 		// Taken from https://www.reddit.com/r/gamemaker/comments/owann0/way_to_load_a_text_file_into_a_string_fast_in_gml/

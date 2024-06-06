@@ -13,8 +13,16 @@ function unpause_tas()
 
 // Keys
 if keyboard_check_pressed(vk_f6) // Save tas
-{
-	var tas_name = "tas.ptm"
+{	
+	var tas_name = ""
+	if tas_path != ""
+	{
+		tas_name = tas_path
+	}
+	else
+	{
+		tas_name = "tas.ptm"
+	}
 	if file_exists(tas_name)
 	{
 		// We delete the tas to avoid saving to the end of an existing one
