@@ -42,7 +42,7 @@ if file_exists("tasconfig.ini")
 	global.tas_show_stats = ini_read_real("TAS", "show_stats", true)
 	global.tas_show_inputs = ini_read_real("TAS", "show_input_display", true)
 	global.tas_show_all_collision = ini_read_real("TAS", "show_all_collision", true)
-	global.tas_show_everything = ini_read_real("TAS", "show_input_everything", false)
+	global.tas_show_everything = ini_read_real("TAS", "show_everything", false)
 	global.tas_show_bounding_boxes = ini_read_real("TAS", "show_bounding_boxes", false)
 
 	ini_close()
