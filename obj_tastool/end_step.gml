@@ -39,25 +39,15 @@ if instance_exists(obj_player)
 	// 	}
 	// }
 	// estimated_max_speed = estimated_max_speed * sign(player_hsp) // makes it negative if the player hsp is negative
+
+	// Hit lag
+	prev_hitlag = hitlag
+	hitlag = obj_player.hitLag
 }
 
 previous_x = player_x
 previous_y = player_y
 
-// Input display
-var current_inputs = []
-
-// Loop through every keycode (from 8 to 249) to find the keys that are being pressed
-// Keycode table: http://www.foreui.com/articles/Key_Code_Table.htm
-for (var key=8; key<=249; key++)
-{
-	if keyboard_check(key)
-	{
-		array_push(current_inputs, key)
-	}
-}
-
-array_push(inputs, current_inputs)
 
 // SHOW COLLISION
 if instance_exists(obj_solid)

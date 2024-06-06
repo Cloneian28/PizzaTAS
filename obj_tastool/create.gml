@@ -30,10 +30,9 @@ mach4_maxspeed = 20; mach4_accel = 0.10;
 
 depth = -10000000
 
-// input display
-inputs = []
-frames_without_change = 0
-inputs_to_draw = 10
+// hit lag
+hitlag = 0
+prev_hitlag = 0
 
 // config
 if file_exists("tasconfig.ini")
@@ -45,7 +44,6 @@ if file_exists("tasconfig.ini")
 	global.tas_show_all_collision = ini_read_real("TAS", "show_all_collision", true)
 	global.tas_show_everything = ini_read_real("TAS", "show_input_everything", false)
 	global.tas_show_bounding_boxes = ini_read_real("TAS", "show_bounding_boxes", false)
-	inputs_to_draw = ini_read_real("TAS", "inputs_to_draw", 10)
 
 	ini_close()
 }

@@ -13,16 +13,20 @@ if global.tas_show_inputs && instance_exists(obj_player)
 	if obj_player.key_slap     {inputs += "G"} // Grab
 	if obj_player.key_taunt    {inputs += "T"} // Taunt
 
-	if inputs == current_inputs
+	var input_history_length = array_length_1d(input_history)
+	if inputs == input_history[input_history_length-1][1]
 	{
-		frames_without_change += 1
+		input_history[input_history_length-1][0] += 1
 	}
 	else
 	{
-		old_inputs = [frames_without_change, current_inputs]
-		array_push(input_history, old_inputs)
+		new_inputs = [1, inputs]
+		array_push(input_history, new_inputs)
+	}
 
-		frames_without_change = 1
-		current_inputs = inputs
+	while input_history_length > inputs_to_display
+	{
+		array_delete(input_history, 0, 1) // delete the first element of the array until the array is at the desired size
+		input_history_length = array_length_1d(input_history)
 	}
 }

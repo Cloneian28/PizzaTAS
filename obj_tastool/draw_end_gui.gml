@@ -3,7 +3,7 @@ draw_set_halign(fa_left)
 draw_set_valign(fa_top)
 
 // draw the credits
-credits_string = "TAS TOOL V0.0 BY CLONEIAN28"
+credits_string = "TAS TOOL V0.1 BY CLONEIAN28"
 draw_text(8, 8, credits_string)
 
 line_space = string_height("A")
@@ -21,7 +21,7 @@ if obj_tasplayback.mode != 0
 	else if obj_tasplayback.mode == 2 {mode_string = "PLAYING"}
 
 	// Get the current frame and the amount of frames left in the tas
-	frame_string = concat(obj_tasplayback.current_frame, " ", obj_tasplayback.frames)
+	frame_string = concat(obj_tasplayback.current_frame)
 
 	draw_text(draw_x, draw_y, concat(mode_string, " ", frame_string))
 } 
@@ -89,7 +89,7 @@ if instance_exists(obj_player)
 		
 		draw_y += line_space
 
-		sprite_string = concat("SPRITE: ", string_upper(sprite_get_name(obj_player.sprite_index)))
+		sprite_string = concat("SPRITE: ", string_upper(sprite_get_name(obj_player.sprite_index)), " ", obj_player.image_index)
 		draw_text(draw_x, draw_y, sprite_string) 
 
 		draw_y += line_space
@@ -99,16 +99,26 @@ if instance_exists(obj_player)
 		
 
 		/* - MISC STATS - */
-		draw_y += line_space *2
+		draw_x = obj_screensizer.actual_width-8
+		draw_y = 8
 
 		// Room info
-		room_string = concat("ROOM: ", string_upper(room_get_name(room)))
+		room_string = concat(string_upper(room_get_name(room)))
 		door_string = concat(" ", string_upper(obj_player.targetDoor))
 
 		roominfo_string = concat(room_string, door_string)
 		
-		draw_text(draw_x, draw_y, roominfo_string) 
+		draw_set_halign(fa_right)
+		draw_set_valign(fa_top)
+		draw_text(draw_x, draw_y, roominfo_string)
 
-		draw_y += line_space
+		// Hit lag
+		if hitlag != prev_hitlag
+		{
+			draw_y += line_space
+			hitlag_string = concat("LAG: ", hitlag)
+
+			draw_text(draw_x, draw_y, hitlag_string)
+		}
 	}
 }
