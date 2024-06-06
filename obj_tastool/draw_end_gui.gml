@@ -3,7 +3,7 @@ draw_set_halign(fa_left)
 draw_set_valign(fa_top)
 
 // draw the credits
-credits_string = "TAS TOOL V0.1 BY CLONEIAN28"
+credits_string = "TAS TOOL V1.0 BY CLONEIAN28"
 draw_text(8, 8, credits_string)
 
 line_space = string_height("A")
