@@ -10,21 +10,27 @@ line_space = string_height("A")
 
 
 // Tas info
-if obj_tasplayback.mode != 0
-{
-	draw_x = string_width(credits_string+"AA")
-	draw_y = 8
+draw_x = string_width(credits_string+"AA")
+draw_y = 8
 	
-	// Get the mode the tas is in
-	mode_string = ""
-	if obj_tasplayback.mode == 1 	  {mode_string = "RECORDING"}
-	else if obj_tasplayback.mode == 2 {mode_string = "PLAYING"}
+// Get the mode the tas is in
+mode_string = ""
+if global.tas_paused == true      {mode_string = "PAUSED"}
+else if obj_tasplayback.mode == 1 {mode_string = "RECORDING"}
+else if obj_tasplayback.mode == 2 {mode_string = "PLAYING"}
 
-	// Get the current frame and the amount of frames left in the tas
-	frame_string = concat(obj_tasplayback.current_frame)
+// Get the current frame and the amount of frames left in the tas
+if mode_string != ""
+{
+	if obj_tasplayback.mode
+	{
+		mode_string = concat(mode_string, " ", obj_tasplayback.current_frame)
+	}
 
-	draw_text(draw_x, draw_y, concat(mode_string, " ", frame_string))
-} 
+	draw_text(draw_x, draw_y, mode_string)
+}
+
+
 
 // player stats
 if instance_exists(obj_player)

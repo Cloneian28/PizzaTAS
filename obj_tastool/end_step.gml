@@ -99,8 +99,18 @@ if instance_exists(obj_hurtbox)
 		obj_hurtbox.visible = true
 		obj_hurtbox.depth = -500
 	}
-	
 }
+if instance_exists(obj_hallway)
+{
+	obj_hallway.visible = global.tas_show_all_collision
+	obj_hallway.depth = -500
+}
+if instance_exists(obj_verticalhallway)
+{
+	obj_verticalhallway.visible = global.tas_show_all_collision
+	obj_verticalhallway.depth = -500
+}
+
 
 // SHOW EVERYTHING
 if global.tas_show_everything == true
@@ -109,4 +119,29 @@ if global.tas_show_everything == true
 	{
 		visible = true // show absolutely everything
 	}
+}
+
+// KEYS
+if keyboard_check_pressed(vk_f7)
+{
+	if global.tas_unbound_camera
+	{
+		global.tas_unbound_camera = false
+	}
+	else
+	{
+		global.tas_unbound_camera = true
+	}
+}
+
+
+if global.tas_unbound_camera
+{
+	var cam_width = camera_get_view_width(view_camera[0])
+    var cam_height = camera_get_view_height(view_camera[0])
+
+    var cam_x = player_x - (cam_width/2)
+    var cam_y = player_y - (cam_height/2)
+
+	camera_set_view_pos(view_camera[0], cam_x, cam_y)
 }

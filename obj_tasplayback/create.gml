@@ -6,7 +6,7 @@ current_frame = 0
 
 global.tas_paused = false
 
-ignore_keys = [ord("P")]
+ignore_keys = [ord("P"), vk_f6, vk_f7]
 
 // Read the config file
 if file_exists("tasconfig.ini")

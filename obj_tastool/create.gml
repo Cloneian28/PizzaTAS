@@ -3,6 +3,7 @@ global.tas_show_all_collision = true
 global.tas_show_everything = false
 global.tas_show_bounding_boxes = true
 global.tas_draw_object_stats = true
+global.tas_unbound_camera = false
 
 // we add "-" and "_" to the smallfont
 global.smallfont = font_add_sprite_ext(spr_smallerfont, "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ!¡.:?¿1234567890ÁÄÃÀÂÉÈÊËÍÎÏÓÖÕÔÚÙÛÜÇ-_", 1, 0)
@@ -42,6 +43,7 @@ if file_exists("tasconfig.ini")
 	global.tas_show_all_collision = ini_read_real("TAS", "show_all_collision", true)
 	global.tas_show_everything = ini_read_real("TAS", "show_everything", false)
 	global.tas_show_bounding_boxes = ini_read_real("TAS", "show_bounding_boxes", false)
+	global.tas_unbound_camera = ini_read_real("TAS", "use_unbound_camera", false)
 
 	ini_close()
 }
