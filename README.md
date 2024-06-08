@@ -31,6 +31,7 @@ There are 3 modes you can use to control how the tool behaves (defined in tascon
 
 Keybindings:
 - F6: Saves the tas to the path specified in tasconfig.ini
+- F7: Toggles the unbound camera, which allows you to see past the room boundaries
 - P: Freezes the game until it is pressed again
 
 ## Credits ##
