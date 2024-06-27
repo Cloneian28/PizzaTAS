@@ -1,7 +1,6 @@
 ; For use with versions of UndertaleModTool that do not support structs
 : This script is a modified version of scr_pause which makes sure obj_tastool and obj_tasplayback are active at all times
 ; If you are using UndertaleModTool Community Edition, and want to modify this script, you can just modify the script directly in UMT to save yourself the headache of dealing with assembly
-
 .localvar 2 arguments
 .localvar 2747 icon 2032
 .localvar 27 i 2050
@@ -683,6 +682,10 @@ conv.i.v
 call.i instance_activate_object(argc=1)
 popz.v
 pushi.e 1207
+conv.i.v
+call.i instance_activate_object(argc=1)
+popz.v
+pushi.e 1208
 conv.i.v
 call.i instance_activate_object(argc=1)
 popz.v

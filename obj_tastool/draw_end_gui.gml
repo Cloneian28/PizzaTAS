@@ -33,14 +33,13 @@ if mode_string != ""
 
 
 // player stats
-if instance_exists(obj_player)
+if global.tas_show_stats
 {
-	draw_x = 8
-	draw_y = 12+line_space // just below the credits
-
-
-	if global.tas_show_stats
+	if instance_exists(obj_player)
 	{
+		draw_x = 8
+		draw_y = 12+line_space // just below the credits
+	
 		/* - PLAYER STATS - */
 		// Position
 		separation = string_width("AAAAAAAAAA ")
@@ -106,7 +105,7 @@ if instance_exists(obj_player)
 
 		/* - MISC STATS - */
 		draw_x = obj_screensizer.actual_width-8
-		draw_y = 8
+		draw_y = 8 // below room info
 
 		// Room info
 		room_string = concat(string_upper(room_get_name(room)))
@@ -125,6 +124,35 @@ if instance_exists(obj_player)
 			hitlag_string = concat("LAG: ", hitlag)
 
 			draw_text(draw_x, draw_y, hitlag_string)
+		}
+
+		// Room Timer
+		if global.option_timer
+		{
+			// code taken from: https://forum.gamemaker.io/index.php?threads/time-function-stop-watch.54637/
+			var room_minutes = room_time div 60;
+			var room_seconds = (room_time mod (60*60)) mod (60);
+
+			var prev_room_minutes = prev_room_time div 60;
+			var prev_room_seconds = (prev_room_time mod (60*60)) mod (60);
+
+			var room_timer_string = scr_get_timer_string(room_minutes, room_seconds, 0)
+			var prev_room_timer_string = scr_get_timer_string(prev_room_minutes, prev_room_seconds, 0)
+
+			draw_x = obj_screensizer.actual_width - 115
+			draw_y = obj_screensizer.actual_height - 8 - line_space
+
+			if global.option_timer_type == 2
+			{
+				draw_y -= line_space
+			}
+
+
+			draw_set_halign(fa_left)
+			draw_set_valign(fa_bottom)
+
+			draw_text(draw_x, draw_y, room_timer_string)
+			draw_text(draw_x, draw_y-line_space, prev_room_timer_string)
 		}
 	}
 }

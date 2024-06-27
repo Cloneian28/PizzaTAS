@@ -2,7 +2,6 @@ input_history = [[0, ""]]
 inputs_to_display = 15
 
 global.tasinputfont = font_add_sprite_ext(spr_tasinputfont, "^v<>JGTD", 1, 0)
-global.tas_show_inputs = true
 
 if file_exists("tasconfig.ini")
 {

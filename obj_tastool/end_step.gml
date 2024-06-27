@@ -49,26 +49,20 @@ previous_x = player_x
 previous_y = player_y
 
 
-// SHOW COLLISION
-if instance_exists(obj_solid)
+if global.tas_show_all_collision
 {
-	if global.tas_show_all_collision
+	// SHOW COLLISION
+	if instance_exists(obj_solid)
 	{
 		obj_solid.visible = true
 		obj_solid.depth = -500
 	}
-}
-if instance_exists(obj_slope)
-{
-	if global.tas_show_all_collision
+	if instance_exists(obj_slope)
 	{
 		obj_slope.visible = true
 		obj_slope.depth = -500
 	}
-}
-if instance_exists(obj_platform)
-{
-	if global.tas_show_all_collision
+	if instance_exists(obj_platform)
 	{
 		obj_platform.visible = true
 		obj_platform.depth = -500
@@ -81,25 +75,20 @@ if instance_exists(obj_platform)
 			if y < player_bbox_bottom {image_alpha = 0.3} // below
 		}
 	}
-}
 
-// enemy hitboxes
-if instance_exists(obj_bosshitbox)
-{
-	if global.tas_show_all_collision
+	// enemy hitboxes
+	if instance_exists(obj_bosshitbox)
 	{
 		obj_bosshitbox.visible = true
 		obj_bosshitbox.depth = -500
 	}
-}
-if instance_exists(obj_hurtbox)
-{
-	if global.tas_show_all_collision
+	if instance_exists(obj_hurtbox)
 	{
 		obj_hurtbox.visible = true
 		obj_hurtbox.depth = -500
 	}
 }
+
 if instance_exists(obj_hallway)
 {
 	obj_hallway.visible = global.tas_show_all_collision
@@ -145,3 +134,5 @@ if global.tas_unbound_camera
 
 	camera_set_view_pos(view_camera[0], cam_x, cam_y)
 }
+
+room_time += timer_step

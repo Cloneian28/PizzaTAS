@@ -3,10 +3,22 @@ tas_path = ""
 frames = 0
 mode = 0 // 0: No tas, 1: Recording, 2: Playback
 current_frame = 0
+ignore_keys = [
+	global.taskey_toggle_unbound_camera,
+	global.taskey_toggle_collision,
+	global.taskey_toggle_stats,
+	global.taskey_toggle_bounding_boxes,
+	global.taskey_toggle_show_everything,
+	global.taskey_pause,
+	global.taskey_frameadvance,
+	global.taskey_savestate,
+	global.taskey_loadstate,
+	global.taskey_save_tas
+	]
 
-global.tas_paused = false
-
-ignore_keys = [ord("P"), vk_f6, vk_f7]
+// pausing
+keys_when_paused = []
+frame_advance = false
 
 // Read the config file
 if file_exists("tasconfig.ini")

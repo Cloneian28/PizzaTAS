@@ -1,18 +1,83 @@
 function pause_tas()
 {
-	global.tas_paused = true
 	instance_deactivate_all(false)
 	instance_activate_object(obj_tasplayback)
 	instance_activate_object(obj_tastool)
+	// Loop through every keycode (from 8 to 249) to find the ones that are being pressed
+	// Keycode table: http://www.foreui.com/articles/Key_Code_Table.htm
+	for (var key=8; key<=249; key++)
+	{
+		if keyboard_check(key)
+		{
+			// check if we should ignore the key
+			var ignore = false
+			for (var i=0; i<array_length_1d(ignore_keys); i++)
+			{
+				if ignore_keys[i] == key
+				{
+					ignore = true
+				}
+			}
+
+			if not ignore
+			{
+				array_push(keys_when_paused, key)
+			}
+		}
+	}
+	global.tas_paused = true
+	
 }
 function unpause_tas()
 {
-	global.tas_paused = false
 	instance_activate_all()
+	// Loop through every keycode (from 8 to 249) to find the ones that are being pressed
+	// Keycode table: http://www.foreui.com/articles/Key_Code_Table.htm
+	for (var key=8; key<=249; key++)
+	{
+		if keyboard_check(key)
+		{
+			// check if we should ignore the key
+			var ignore = false
+			for (var i=0; i<array_length_1d(ignore_keys); i++)
+			{
+				if ignore_keys[i] == key
+				{
+					ignore = true
+				}
+			}
+
+			if not ignore
+			{
+				// Check if the key is in the pause keys
+				var in_pause_keys = false
+				for (var j=0; j<array_length_1d(keys_when_paused); j++)
+				{
+					var paused_key = keys_when_paused[j]
+
+					if paused_key == key
+					{
+						in_pause_keys = true
+					}
+				}
+
+				if not in_pause_keys
+				{
+					// Repress
+					keyboard_key_release(key)
+					keyboard_key_press(key)
+				}
+			}
+		}
+	}
+	global.tas_paused = false
+
+	keys_when_paused = []
+	
 }
 
 // Keys
-if keyboard_check_pressed(vk_f6) // Save tas
+if keyboard_check_pressed(global.taskey_save_tas) // Save tas
 {	
 	var tas_name = ""
 	if tas_path != ""
@@ -55,17 +120,6 @@ if keyboard_check_pressed(vk_f6) // Save tas
 	// Save the tas to a file
 	file_text_write_string(file, tas_string)
 	file_text_close(file)
-}
-if keyboard_check_pressed(ord("P")) // Pausing
-{
-	if global.tas_paused == false
-	{
-		pause_tas()
-	}
-	else
-	{
-		unpause_tas()
-	}
 }
 
 
