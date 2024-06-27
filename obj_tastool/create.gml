@@ -10,7 +10,7 @@ global.tas_paused = false
 global.tas_show_inputs = true
 
 // Tas keys
-global.taskey_pause = vk_f9
+global.taskey_pause = ord("P")
 global.taskey_frameadvance = ord("F")
 
 global.taskey_savestate = vk_control
@@ -71,6 +71,18 @@ if file_exists("tasconfig.ini")
 	global.tas_show_everything = ini_read_real("TAS", "show_everything", false)
 	global.tas_show_bounding_boxes = ini_read_real("TAS", "show_bounding_boxes", false)
 	global.tas_unbound_camera = ini_read_real("TAS", "use_unbound_camera", false)
+
+	// keys
+	global.taskey_pause = ini_read_real("KEYS", "pause", ord("P"))
+	global.taskey_frameadvance = ini_read_real("KEYS", "frame_advance", ord("F"))
+
+	global.taskey_save_tas = ini_read_real("KEYS", "save_tas", vk_f6)
+
+	global.taskey_toggle_unbound_camera = ini_read_real("KEYS", "toggle_unbound_camera", vk_f7)
+	global.taskey_toggle_collision = ini_read_real("KEYS", "toggle_collision", vk_f1)
+	global.taskey_toggle_stats = ini_read_real("KEYS", "toggle_stats", vk_f2)
+	global.taskey_toggle_bounding_boxes = ini_read_real("KEYS", "toggle_bounding_boxes", vk_f3)
+	global.taskey_toggle_show_everything = ini_read_real("KEYS", "toggle_show_everything", vk_f4)
 
 	ini_close()
 }

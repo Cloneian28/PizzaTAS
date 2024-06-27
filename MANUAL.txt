@@ -1,0 +1,62 @@
+This is the manual for PizzaTAS, this manual will explain how to setup the tool as well as how to use it
+
+== INSTALLATION ==
+To install this tool, you can use Pizza Oven to install it using the mod browser
+
+Otherwise, heres how to install it manually:
+- Get an XDelta Patcher (such as Delta Patcher or XDelta3 GUI)
+- Download PizzaTAS.zip from either the gamebanana page or the releases page
+- Extract it and put tastool.xdelta somewhere nice
+- Open your XDelta Patcher
+- Navigate to your Pizza Tower instalation folder (on steam you can find this by right clicking the game on your library and clicking "Manage Files")
+- Select the data.win file as the original file and the tastool.xdelta file as the patch
+- If you get an error after this step, your game is either already modded or not the right version
+
+== CONFIGURATION ==
+To configure the tool, you'll need to download tasconfig.zip from the same place you got this tool, then navigate to your PizzaTower_GM2 folder (on windows, you can find this folder by pressing Win+R, typing %appdata%, then navigating to it) and extract the tasconfig.ini file into the folder, after that, just open up tasconfig.ini with any text editor (such as notepad) and change the settings as needed
+
+== USAGE ==
+PizzaTAS is best used along with LibTAS because of its dedicated TASing tools (such as savestates, rewinding, and much more), Currently, PizzaTAS serves as a way to easily get information about the game state (such as speed, x and y coordinates, etc) to make TASing easier and as a way to record your inputs and play them back ingame with audio (libTAS requires a linux port of pizza tower which doesnt support audio)
+
+Guide on how to set up libTAS on windows: https://clementgallet.github.io/libTAS/guides/wsl/
+
+== STATS ==
+Here are some descriptions for the stats:
+- X: Your x coordinate
+- Y: Your y coordinate
+- dX: The difference between your previous x and your current x position (useful for seeing how fast youre going)
+- dY: The difference between your previous y and your current y position (useful for seeing how fast youre going)
+- hsp: Your horizontal velocity
+- vsp: Your vertical velocity
+- hdiff: The difference between your previous hsp and your current hsp
+- vdiff: The difference between your previous vsp and your current vsp
+
+- jump: Whether you can currently jump, also shows your coyote time
+- grounded: Whether you are currently in the ground
+- sprite: Your current sprite, also shows the frame the sprite is in
+- state: Your current state
+
+- Room name and target door, which appear on the top left
+- Lag meter, which appears during a freeze frame
+
+Theres also two extra timers, one for the time youve spent on the current room, and one for the time you spent on the previous room
+
+== KEYBINDNGS ==
+Below is a list of the function keys, you can rebind these in tasconfig.ini
+
+Pause: P
+Frame advance: F
+
+Save tas: F6
+
+Toggle unbound camera: F7 (which makes the camera able to see past the room boundaries and doesnt freeze during pause abuse)
+Toggle collision drawing: F1
+Toggle stats: F2
+Toggle bounding boxes: F3
+Show everything: F4 (makes everything visible, note that this may affect gameplay, so use with caution)
+
+
+If youd like to report a bug, or want to suggest a new feature, please do so in the github issues: https://github.com/Cloneian28/PizzaTAS/issues
+
+
+

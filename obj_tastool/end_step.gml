@@ -111,18 +111,26 @@ if global.tas_show_everything == true
 }
 
 // KEYS
-if keyboard_check_pressed(vk_f7)
+if keyboard_check_pressed(global.taskey_toggle_unbound_camera)
 {
-	if global.tas_unbound_camera
-	{
-		global.tas_unbound_camera = false
-	}
-	else
-	{
-		global.tas_unbound_camera = true
-	}
+	global.tas_unbound_camera = !global.tas_unbound_camera
 }
-
+if keyboard_check_pressed(global.taskey_toggle_collision)
+{
+	global.tas_show_all_collision = !global.tas_show_all_collision
+}
+if keyboard_check_pressed(global.taskey_toggle_stats)
+{
+	global.tas_show_stats = !global.tas_show_stats
+}
+if keyboard_check_pressed(global.taskey_toggle_bounding_boxes)
+{
+	global.tas_show_bounding_boxes = !global.tas_show_bounding_boxes
+}
+if keyboard_check_pressed(global.taskey_toggle_show_everything)
+{
+	global.tas_show_everything = !global.tas_show_everything
+}
 
 if global.tas_unbound_camera
 {
@@ -135,4 +143,7 @@ if global.tas_unbound_camera
 	camera_set_view_pos(view_camera[0], cam_x, cam_y)
 }
 
-room_time += timer_step
+if not global.tas_paused
+{
+	room_time += timer_step
+}
