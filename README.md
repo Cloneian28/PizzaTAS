@@ -2,7 +2,7 @@
 
 <p>This repository contains all the source code for PizzaTAS<br>
 Releases can be found here: https://github.com/Cloneian28/PizzaTAS/releases/<br>
-Or alternatively, you can find them at Gamebanana: https://gamebanana.com/tools/17099<p>
+Or alternatively, you can find them at Gamebanana: https://gamebanana.com/tools/17099</p>
 
 ## Instalation ##
 To install this tool, you can use Pizza Oven to install it using the mod browser
@@ -31,6 +31,7 @@ There are 3 modes you can use to control how the tool behaves (defined in tascon
 
 Keybindings:
 - F6: Saves the tas to the path specified in tasconfig.ini
+- F7: Toggles the unbound camera, which allows you to see past the room boundaries
 - P: Freezes the game until it is pressed again
 
 ## Credits ##
