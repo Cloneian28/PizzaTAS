@@ -19,6 +19,9 @@ if instance_exists(obj_player)
 	player_hdiff = player_hsp - previous_hsp
 	player_vdiff = player_vsp - previous_vsp
 
+	// Player speed
+	player_movespeed = obj_player.movespeed
+
 
 	// [UNUSED]
 	// estimated_max_speed = abs(player_hsp) 
@@ -131,6 +134,28 @@ if keyboard_check_pressed(global.taskey_toggle_show_everything)
 {
 	global.tas_show_everything = !global.tas_show_everything
 }
+if keyboard_check_pressed(global.taskey_add_watch)
+{
+    var label = get_string("Enter the name for the watch (this can be whatever you want)", "")
+    if (label != "")
+    {
+        var object = get_string("Enter the name of the object (type 'global' for a global variable)", "")
+        if (object != "")
+        {
+            var variable = get_string("Enter the variable to watch (ej: railmovespeed)", "")
+            if (variable != "")
+            {
+                var watch = concat(label, ",", object, ",", variable)
+                if (watches == "")
+                    watches += watch
+                else
+                    watches += (";" + watch)
+                var config = ini_open("tasconfig.ini")
+                ini_write_string("TAS", "watches", watches)
+            }
+        }
+    }
+}
 
 if global.tas_unbound_camera
 {
@@ -146,4 +171,12 @@ if global.tas_unbound_camera
 if not global.tas_paused
 {
 	room_time += timer_step
+}
+// Transition Time
+if instance_exists(obj_fadeout)
+{
+    if (transition_time == 0 && (!obj_fadeout.fadein))
+    {
+        transition_time = room_time
+    }
 }
