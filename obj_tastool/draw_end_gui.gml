@@ -215,6 +215,11 @@ if instance_exists(obj_screensizer)
 		draw_text(draw_x, draw_y-line_space, prev_room_timer_string)
 		if (transition_time > 0)
         {
+        	var transition_minutes = transition_time div 60;
+        	var transition_seconds = (transition_time mod (60*60)) mod (60)
+
+        	var transition_time_string = scr_get_timer_string(room_minutes, room_seconds, 0)
+
             draw_set_color(c_lime)
             draw_text(draw_x, (draw_y - line_space * 2), transition_time_string)
         }
