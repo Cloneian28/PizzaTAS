@@ -3,7 +3,7 @@ draw_set_halign(fa_left)
 draw_set_valign(fa_top)
 
 // draw the credits
-credits_string = "TAS TOOL V1.3 BY CLONEIAN28"
+credits_string = "TAS TOOL V1.4l BY CLONEIAN28"
 draw_text(8, 8, credits_string)
 
 line_space = string_height("A")
@@ -71,12 +71,10 @@ if instance_exists(obj_screensizer)
 
 			draw_y += line_space
 			
-			// Speed Difference
-			hdiff_string = concat("HDIF: ", player_hdiff)
-			vdiff_string = concat("VDIF: ", player_vdiff)
+			// Speed
+			movespeed_string = concat("SPEED: ", player_movespeed)
 
-			draw_text(draw_x, draw_y, hdiff_string)
-			draw_text(draw_x+separation, draw_y, vdiff_string)
+			draw_text(draw_x, draw_y, movespeed_string)
 
 			draw_y += line_space*2
 
@@ -131,6 +129,64 @@ if instance_exists(obj_screensizer)
 			
 		}
 	}
+	if global.tas_show_watches
+    {
+        draw_set_halign(fa_right)
+        draw_set_valign(fa_top)
+
+        draw_x = obj_screensizer.actual_width - 8
+        draw_y += (line_space * 2)
+
+        var watch_array = string_split(watches, ";")
+        var num_of_watches = array_length_1d(watch_array)
+
+        // Parse the watches
+        for (var i = 0; i < num_of_watches; i++)
+        {
+            if (watch_array[i] != "")
+            {
+                var watch = string_split(watch_array[i], ",")
+                var label = string_upper(watch[0])
+
+                var variable = watch[2]
+                var variable_value = "???"
+
+                if (watch[1] != "global")
+                {
+                    var object = asset_get_index(watch[1])
+                    if object_exists(object)
+                    {
+                        var already_checked = false
+                        with (object)
+                        {
+                            if (already_checked == false)
+                            {
+                                variable_value = "???"
+                                if variable_instance_exists(self, variable)
+                                {
+                                    variable_value = variable_instance_get(self, variable)
+                                }
+                                already_checked = true
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if variable_global_exists(variable)
+                    {
+                        variable_value = variable_global_get(variable)
+                    }
+                    already_checked = true
+                }
+
+                // Draw the watch
+                draw_text(draw_x, draw_y, concat(label, ": ", variable_value))
+                draw_y += line_space
+            }
+        }
+    }
+
 	// Room Timer
 	if global.option_timer
 	{
@@ -155,8 +211,12 @@ if instance_exists(obj_screensizer)
 
 		draw_set_halign(fa_left)
 		draw_set_valign(fa_bottom)
-
 		draw_text(draw_x, draw_y, room_timer_string)
 		draw_text(draw_x, draw_y-line_space, prev_room_timer_string)
+		if (transition_time > 0)
+        {
+            draw_set_color(c_lime)
+            draw_text(draw_x, (draw_y - line_space * 2), transition_time_string)
+        }
 	}
 }

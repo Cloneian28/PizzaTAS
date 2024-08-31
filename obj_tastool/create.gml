@@ -4,6 +4,7 @@ global.tas_show_all_collision = true
 global.tas_show_everything = false
 global.tas_show_bounding_boxes = true
 global.tas_unbound_camera = false
+global.tas_show_watches = true
 
 global.tas_paused = false
 
@@ -24,7 +25,7 @@ global.taskey_toggle_collision = vk_f1
 global.taskey_toggle_stats = vk_f2
 global.taskey_toggle_bounding_boxes = vk_f3
 global.taskey_toggle_show_everything = vk_f4
-
+global.taskey_add_watch = vk_f8
 
 // we add "-" and "_" to the smallfont
 global.smallfont = font_add_sprite_ext(spr_smallerfont, "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ!¡.:?¿1234567890ÁÄÃÀÂÉÈÊËÍÎÏÓÖÕÔÚÙÛÜÇ-_", 1, 0)
@@ -39,6 +40,7 @@ player_dx = 0 // difference between the previous x and the current x
 player_dy = 0 // difference between the previous y and the current y
 
 // acceleration
+player_movespeed = 0
 player_hdiff = 0 // difference between the current speed and the previous speed
 player_vdiff = 0 // difference between the current speed and the previous speed
 //estimated_max_speed = 0 //Estimated max speed based on current acceleration [UNUSED]
@@ -58,7 +60,11 @@ prev_hitlag = 0
 // room timer
 room_time = 0.0
 prev_room_time = 0.0
+transition_time = 0.0
 timer_step = 0.01666666666666667
+
+// watches
+watches = ""
 
 
 // config
@@ -71,6 +77,10 @@ if file_exists("tasconfig.ini")
 	global.tas_show_everything = ini_read_real("TAS", "show_everything", false)
 	global.tas_show_bounding_boxes = ini_read_real("TAS", "show_bounding_boxes", false)
 	global.tas_unbound_camera = ini_read_real("TAS", "use_unbound_camera", false)
+
+	// watches
+	global.tas_show_watches = ini_read_real("TAS", "show_watches", 1)
+    watches = ini_read_string("TAS", "watches", "")
 
 	// keys
 	global.taskey_pause = ini_read_real("KEYS", "pause", ord("P"))
