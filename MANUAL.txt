@@ -1,7 +1,8 @@
-This is the manual for PizzaTAS, this manual will explain how to setup the tool as well as how to use it
+This is the manual for PizzaTAS, this manual will explain how to set it up as well as how to use it
+Compatible with Pizza Tower v1.1.2
 
 == INSTALLATION ==
-To install this tool, you can use Pizza Oven to install it using the mod browser
+You can use Pizza Oven to install it using the mod browser
 
 Otherwise, heres how to install it manually:
 - Get an XDelta Patcher (such as Delta Patcher or XDelta3 GUI)
@@ -13,10 +14,11 @@ Otherwise, heres how to install it manually:
 - If you get an error after this step, your game is either already modded or not the right version
 
 == CONFIGURATION ==
-To configure the tool, you'll need to download tasconfig.zip from the same place you got this tool, then navigate to your PizzaTower_GM2 folder (on windows, you can find this folder by pressing Win+R, typing %appdata%, then navigating to it) and extract the tasconfig.ini file into the folder, after that, just open up tasconfig.ini with any text editor (such as notepad) and change the settings as needed
+you'll need to download tasconfig.ini from the same place you downloaded it from, then navigate to your PizzaTower_GM2 folder (on windows, you can find this folder by pressing Win+R, typing %appdata%, then navigating to it) and just drop it in, then open up tasconfig.ini with any text editor (such as notepad) and change the settings as needed
 
 == USAGE ==
-PizzaTAS is best used along with LibTAS because of its dedicated TASing tools (such as savestates, rewinding, and much more), Currently, PizzaTAS serves as a way to easily get information about the game state (such as speed, x and y coordinates, etc) to make TASing easier and as a way to record your inputs and play them back ingame with audio (libTAS requires a linux port of pizza tower which doesnt support audio)
+PizzaTAS is best used along with LibTAS because of the dedicated TASing tools it provides (such as savestates, rewinding, and much more).
+Currently, PizzaTAS serves as a way to easily get information about the game state (such as speed, x and y coordinates, etc) to make TASing easier and as a way to record your inputs and play them back ingame with audio (libTAS requires a linux port of pizza tower which doesnt support audio)
 
 Guide on how to set up libTAS on windows: https://clementgallet.github.io/libTAS/guides/wsl/
 
@@ -39,13 +41,13 @@ Here are some descriptions for the stats:
 - Room name and target door, which appear on the top left
 - Lag meter, which appears during a freeze frame
 
-Theres also two extra timers, one for the time youve spent on the current room, and one for the time you spent on the previous room
+Theres also three extra timers, one for the time youve spent on the current room, and one for the time you spent on the previous room, and a green one that shows your room time when you entered a screen transition
 
 == KEYBINDNGS ==
 Below is a list of the function keys, you can rebind these in tasconfig.ini
 
 Pause: P
-Frame advance: F
+Frame advance: F (has some visual glitches, such as frames being delayed by 1 frame on the screen)
 
 Save tas: F6
 
@@ -55,8 +57,27 @@ Toggle stats: F2
 Toggle bounding boxes: F3
 Show everything: F4 (makes everything visible, note that this may affect gameplay, so use with caution)
 
+Add watch: F8 (watches are explained in the next section)
 
-If youd like to report a bug, or want to suggest a new feature, please do so in the github issues: https://github.com/Cloneian28/PizzaTAS/issues
+== WATCHES ==
+Watches allow you to see the value of any variable in the game through the overlay in the same way the stats do
+To add a watch ingame, press the Add watch key (default is F8), this will bring up a series of prompts that will help you setup a watch
 
+First, you will be asked for the name of the watch, this can be whatever you want
+Next, you will be asked for the object to get the variable from, this needs to be a valid object, otherwise the watch will display as ???
+Some examples are:
+- obj_player (the player, duh)
+- global (lets you access any global variable, such as laps)
 
+Finally, you will be asked for the name of the variable, the variable must be accesible from the object, otherwise it will display as ???
+Some examples are:
+- railmovespeed (from obj_player)
+- hitlag (from obj_player)
+- laps (from global)
 
+If you want to remove a watch, youll have to edit tasconfig.ini directly, theyre formatted as "[label],[object],[variable];", so all you need to do is find the watch that matches the one you want to delete and remove it from the watches string.
+
+== CONTRIBUTING ==
+If youd like to report a bug, or want to suggest a new feature, you can do so in either of these sites: 
+https://github.com/Cloneian28/PizzaTAS/issues
+https://gamebanana.com/tools/issues/17099
