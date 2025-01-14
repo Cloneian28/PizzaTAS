@@ -1,3 +1,59 @@
+function play_next_input() {
+	// Check if we arent at the end of the TAS yet
+	if current_frame < frames
+	{
+		var current_inputs = tas[current_frame]
+		var current_inputs_len = array_length_1d(current_inputs)
+
+		// Pressing
+		for (var i=0; i<current_inputs_len; i++)
+		{
+			var keycode = current_inputs[i]
+
+			if not keyboard_check(keycode)
+			{
+				keyboard_key_press(keycode)
+				show_debug_message(concat("PRESSED ", keycode))
+			}
+		}
+
+		// Releasing
+		if current_frame-1 >= 0 // Check if we are not at the start of the file
+		{
+			var previous_inputs = tas[current_frame-1]
+			var previous_inputs_len = array_length_1d(previous_inputs)
+
+			// Loop through previous inputs
+			for (var p=0; p<previous_inputs_len; p++)
+			{
+				var prev_keycode = previous_inputs[p]
+				var should_release = true
+
+				// Check current inputs
+				for (var i=0; i<current_inputs_len; i++)
+				{
+					var current_keycode = current_inputs[i]
+					if current_keycode == prev_keycode
+					{
+						should_release = false
+						break
+					}
+				}
+
+				if should_release 
+				{
+					keyboard_key_release(prev_keycode);
+					show_debug_message(concat("RELEASED ", prev_keycode))
+				} 
+			}
+		}
+	}
+	else
+	{
+		mode = 0 // stop playback
+	}
+}
+
 tas = [] // Usage: global.tas[frame]
 tas_path = ""
 frames = 0
@@ -66,4 +122,12 @@ if file_exists("tasconfig.ini")
 	}
 
 	ini_close()
+}
+
+frames = array_length_1d(tas) // update the frame count
+
+// stinky HACK to avoid the tas from being delayed
+if mode == 2 {
+	play_next_input()
+	current_frame++
 }
